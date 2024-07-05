@@ -153,26 +153,19 @@ else()
 endif()
 
 # Create the static library
-add_library(${PROJECT_NAME}_static STATIC ${SOURCES})
-
-# Create the shared library
-add_library(${PROJECT_NAME}_shared SHARED ${SOURCES})
+add_library(${PROJECT_NAME} STATIC ${SOURCES})
 
 # Add dependencies to ensure headers are generated before compilation
-add_dependencies(${PROJECT_NAME}_static generate_headers)
-add_dependencies(${PROJECT_NAME}_shared generate_headers)
+add_dependencies(${PROJECT_NAME} generate_headers)
 
 # Platform-specific settings
 if (WIN32)
     set(CMAKE_C_COMPILER "gcc")
     set(CMAKE_CXX_COMPILER "g++")
-    target_link_libraries(${PROJECT_NAME}_static)
-    target_link_libraries(${PROJECT_NAME}_shared)
+    target_link_libraries(${PROJECT_NAME})
 else()
-    target_compile_options(${PROJECT_NAME}_static PRIVATE -Wall -Wextra)
-    target_compile_options(${PROJECT_NAME}_shared PRIVATE -Wall -Wextra)
-    target_link_libraries(${PROJECT_NAME}_static pthread)
-    target_link_libraries(${PROJECT_NAME}_shared pthread)
+    target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra)
+    target_link_libraries(${PROJECT_NAME} pthread)
 endif()
 
 # Handle debug mode
