@@ -19,7 +19,6 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Ipub -Ipriv -std=gnu99 -fstrict-aliasing -f
 include_directories(
     ${CMAKE_SOURCE_DIR}/pub
     ${CMAKE_SOURCE_DIR}/priv
-    ${CMAKE_BINARY_DIR}/pub # For generated headers
 )
 
 # Define source files based on common.mk
